@@ -6,6 +6,7 @@ import {
   Header,
   Icon,
   Segment,
+  SegmentGroup,
 } from "semantic-ui-react";
 import { oracle } from "@/lib/oracle";
 import { marked } from "marked";
@@ -34,11 +35,11 @@ const OracleCard = ({
   }
   const choices = oracle[season][value];
   return (
-    <Card centered raised>
-      <Card.Content>
+    <SegmentGroup raised>
+      <Segment>
         <Grid verticalAlign="middle" columns={2}>
           <Grid.Column>
-            <Header textAlign="center" size="huge">
+            <Header textAlign="center" size="large">
               {value}
             </Header>
           </Grid.Column>
@@ -46,30 +47,28 @@ const OracleCard = ({
             <Icon size="huge" className={icon}></Icon>
           </Grid.Column>
         </Grid>
-      </Card.Content>
-      <Card.Content>
-        <Segment>
-          <Grid relaxed columns={choices.length as any}>
+      </Segment>
+      <Segment>
+        <Grid relaxed columns={choices.length as any}>
+          <Grid.Column textAlign="center">
+            <div
+              dangerouslySetInnerHTML={{ __html: marked.parse(choices[0]) }}
+            ></div>
+          </Grid.Column>
+          {choices.length > 1 && (
             <Grid.Column textAlign="center">
               <div
-                dangerouslySetInnerHTML={{ __html: marked.parse(choices[0]) }}
+                dangerouslySetInnerHTML={{ __html: marked.parse(choices[1]) }}
               ></div>
             </Grid.Column>
-            {choices.length > 1 && (
-              <Grid.Column textAlign="center">
-                <div
-                  dangerouslySetInnerHTML={{ __html: marked.parse(choices[1]) }}
-                ></div>
-              </Grid.Column>
-            )}
-          </Grid>
-          {choices.length > 1 && <Divider vertical>OR</Divider>}
-        </Segment>
-      </Card.Content>
-      <Card.Content extra textAlign="right">
+          )}
+        </Grid>
+        {choices.length > 1 && <Divider vertical>OR</Divider>}
+      </Segment>
+      <Segment textAlign="right">
         {value} of {season}
-      </Card.Content>
-    </Card>
+      </Segment>
+    </SegmentGroup>
   );
 };
 

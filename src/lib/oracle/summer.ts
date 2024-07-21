@@ -47,7 +47,7 @@ const summer = {
     "Summer is fleeting. Discard the top two cards off the top of the deck and take two actions this week.",
   ],
   king: [
-    "Hot summer days lead to anger and paranoia among the monsters. Choose one:\n - Community leaders spend the week silencing dissent. **This week ends immediately*. \n- The community leaps into frenzied action. *Start a dangerous Project**.",
+    "Hot summer days lead to anger and paranoia among the monsters. Choose one:\n - Community leaders spend the week silencing dissent. **This week ends immediately**. \n- The community leaps into frenzied action. **Start a dangerous Project**.",
   ],
 };
 

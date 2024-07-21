@@ -45,7 +45,7 @@ const Canvas = forwardRef<fabric.Canvas,{ onLoad?(canvas: fabric.Canvas): void }
       // and should not affect react
       canvas.dispose();
     };
-  }, [canvasRef, onLoad]);
+  }, [canvasRef, onLoad, ref]);
 
   return <canvas ref={canvasRef} />;
 });

@@ -38,7 +38,7 @@ const spring = {
   ],
   jack: [
     "It is unusual that monsters form communities. **Agree on Something** about why this community exists.",
-    "Monsters have always lived in communities. Agree on Something about the nature of monster communities.",
+    "Monsters have always lived in communities. **Agree on Something** about the nature of monster communities.",
   ],
   queen: [
     "Some of the monsters here have traveled a great distance to join the community. What drew them here? Where did they leave?",
