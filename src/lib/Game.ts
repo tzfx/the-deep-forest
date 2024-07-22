@@ -8,6 +8,12 @@ export class Game {
   private _season = 0;
   private _message = "";
 
+  private _turn = {
+    draw: false,
+    projects: false,
+    action: false
+  }
+
   constructor() {
     console.log("Generating decks...");
     const spring: SuitedDeck = new SuitedDeck("spring");
@@ -49,6 +55,27 @@ export class Game {
     return this._message;
   }
 
+  get turnStatus() {
+    return this._turn;
+  }
+
+  set turnDraw(status: boolean) {
+    this._turn.draw = status
+  }
+  set turnProjects(status: boolean) {
+    this._turn.projects = status;
+  }
+  set turnAction(status: boolean) {
+    this._turn.action = status;
+  }
+
+
+  turn() {
+    this._turn.draw = false;
+    this._turn.projects = false;
+    this._turn.action = false;
+  }
+
   draw() {
     this._message = "";
     if (this._ended) {
@@ -79,6 +106,7 @@ export class Game {
         this.end();
         return this.currentCard;
       }
+      this._turn.draw = true;
       return this.currentCard;
     }
   }

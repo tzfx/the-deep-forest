@@ -11,13 +11,7 @@ import {
 import { oracle } from "@/lib/oracle";
 import { marked } from "marked";
 
-const OracleCard = ({
-  season,
-  value,
-}: {
-  season: keyof typeof oracle;
-  value: keyof typeof oracle.autumn;
-}) => {
+const season2icon = (season: string) => {
   let icon = "";
   switch (season) {
     case "spring":
@@ -33,6 +27,17 @@ const OracleCard = ({
       icon = "snowflake";
       break;
   }
+  return icon;
+}
+
+const OracleCard = ({
+  season,
+  value,
+}: {
+  season: keyof typeof oracle;
+  value: keyof typeof oracle.autumn;
+}) => {
+  let icon = season2icon(season);
   const choices = oracle[season][value];
   return (
     <SegmentGroup raised>
@@ -73,3 +78,4 @@ const OracleCard = ({
 };
 
 export default OracleCard;
+export { season2icon };
