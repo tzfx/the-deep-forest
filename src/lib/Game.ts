@@ -1,6 +1,6 @@
 import { Card, SuitedDeck } from "./oracle/deck";
 
-export class Game {
+class Game {
   private _ended: boolean;
   private _started: boolean;
   private _current: Card;
@@ -59,16 +59,6 @@ export class Game {
     return this._turn;
   }
 
-  set turnDraw(status: boolean) {
-    this._turn.draw = status
-  }
-  set turnProjects(status: boolean) {
-    this._turn.projects = status;
-  }
-  set turnAction(status: boolean) {
-    this._turn.action = status;
-  }
-
 
   turn() {
     this._turn.draw = false;
@@ -116,3 +106,6 @@ export class Game {
     this._message = "The game is over.";
   }
 }
+
+const GameInstance = new Game();
+export default GameInstance;

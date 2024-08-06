@@ -1,12 +1,39 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as fabric from "fabric";
 import { Canvas } from "./Canvas";
 import { Button, Input, Rail, Segment } from "semantic-ui-react";
 
-const FabricCanvas = () => {
+const DICE = {
+  0: "",
+  1: "⚀",
+  2: "⚁",
+  3: "⚂",
+  4: "⚃",
+  5: "⚄",
+  6: "⚅",
+};
+
+const FabricCanvas = ({ processWork }: { processWork: boolean }) => {
   const ref = useRef<fabric.Canvas>(null);
 
   const [mode, setMode] = useState<"move" | "draw" | "text">("draw");
+
+  const [projects, setProjects] = useState<fabric.Textbox[]>([]);
+
+  const workProjects = () => {
+    if (processWork) {
+      setProjects((p) =>
+        projects
+          .map((p) => {
+            const opts = Object.values(DICE);
+            const value = opts.findIndex((d) => d === p.text);
+            p.text = (DICE as any)[value - 1];
+            return p;
+          })
+          .filter((p) => p.text !== "")
+      );
+    }
+  };
 
   const onLoad = useCallback((canvas: fabric.Canvas) => {
     canvas.setDimensions({
@@ -159,6 +186,21 @@ const FabricCanvas = () => {
               });
               canvas.viewportCenterObject(text);
               canvas.add(text);
+            }}
+          ></Button>
+          <Button
+            icon="dice"
+            size="big"
+            onClick={() => {
+              const canvas = ref.current as fabric.Canvas;
+              setMode("move");
+              canvas.isDrawingMode = false;
+              const project = new fabric.Textbox("⚅", {
+                fill: "black",
+              });
+              canvas.viewportCenterObject(project);
+              canvas.add(project);
+              setProjects([...projects, project]);
             }}
           ></Button>
         </div>
